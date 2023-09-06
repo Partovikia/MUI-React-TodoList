@@ -6,7 +6,15 @@ import { FormControl } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "./EditIcon";
 
-const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
+const Form = ({
+  input,
+  setInput,
+  todos,
+  setTodos,
+  editTodo,
+  setEditTodo,
+  isDarkMode,
+}) => {
   const updateTodo = (title, id, completed) => {
     const newTodo = todos.map((todo) =>
       todo.id === id ? { title, id, completed } : todo
@@ -43,6 +51,7 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
 
   return (
     <FormControl
+      classname={isDarkMode ? "dark" : ""}
       sx={{
         displey: "flex",
         width: "100%",

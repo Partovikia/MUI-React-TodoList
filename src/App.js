@@ -12,17 +12,10 @@ function App() {
   const [input, setInput] = useState("");
   const [todos, setTodos] = useState(initialState);
   const [editTodo, setEditTodo] = useState(null);
-  const [active, setActive] = React.useState("all");
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
-  const [theme, setTheme] = useState("dark");
-  function toggleTheme() {
-    setTheme(theme.palette.mode === "light" ? "dark" : "light");
+  const [isDarkMode, setIsDarkMode] = React.useState(true);
+  function toggleDarkMode() {
+    setIsDarkMode((prevMode) => !prevMode);
   }
-  // const togghleThemeMode = () => {
-  //   darkTheme(
-  //     setDarkTheme === theme.dark.mode ? theme.dark.mode : theme.light.mode
-  //   );
-  // };
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -77,9 +70,7 @@ function App() {
             md={5}
             xs={11}
           >
-            <Header>
-              <IconButton onClic={toggleTheme} />
-            </Header>
+            <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
           </Grid>
           <Grid container md={4} xs={11}>
             <Form
@@ -89,6 +80,8 @@ function App() {
               setTodos={setTodos}
               editTodo={editTodo}
               setEditTodo={setEditTodo}
+              isDarkMode={isDarkMode}
+              toggleDarkMode={toggleDarkMode}
             />
           </Grid>
           <Grid
@@ -110,8 +103,9 @@ function App() {
               setTodos={setTodos}
               setEditTodo={setEditTodo}
               handleClear={handleClear}
-              active={setActive}
               handleFilter={handleFilter}
+              isDarkMode={isDarkMode}
+              toggleDarkMode={toggleDarkMode}
             />
           </Grid>
         </Grid>
